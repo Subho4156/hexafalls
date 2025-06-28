@@ -1,7 +1,8 @@
 import { useToast } from "@/components/ui/use-toast";
-import { errorToPrettyError } from "@/lib/errors";
+
 import { useAccount } from "wagmi";
 import useSiteConfigContracts from "./useSiteConfigContracts";
+import { errorToPrettyError } from "@/lib/error";
 
 /**
  * Hook to handle errors.
