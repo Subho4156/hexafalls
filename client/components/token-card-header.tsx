@@ -4,8 +4,6 @@ import { SiteConfigContracts } from "@/config/site";
 import { addressToShortAddress } from "@/lib/converters";
 import { formatEther, isAddressEqual, zeroAddress } from "viem";
 import { useAccount } from "wagmi";
-import { TokenInvestDialog } from "./token-invest-dialog";
-import { TokenReturnInvestmentDialog } from "./token-return-investment-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { FarmTokenMetadata } from "@/types/farm-token-metadata";
@@ -21,6 +19,8 @@ import { useEffect, useState } from "react";
 import { ipfsUriToHttpUri, loadJsonFromIpfs } from "@/lib/ipfs";
 import { Loader2 } from "lucide-react";
 import { TokenSellDialog } from "./token-sell-dialog";
+import { TokenInvestDialog } from "./token-invest-dialog";
+import { TokenReturnInvestmentDialog } from "./token-return-investment-dialog";
 
 interface TokenCardHeaderProps {
   token: string;
@@ -132,7 +132,8 @@ export function TokenCardHeader(props: TokenCardHeaderProps): JSX.Element {
                   : props.reputationScore >= 50
                   ? "text-yellow-500"
                   : "text-red-500"
-              }`}>
+              }`}
+            >
               {props.reputationScore}%
             </span>
           </div>
@@ -161,7 +162,8 @@ export function TokenCardHeader(props: TokenCardHeaderProps): JSX.Element {
               <a
                 href={`${props.contracts.chain.blockExplorers?.default?.url}/address/${props.tokenOwner}`}
                 target="_blank"
-                className="text-sm break-all underline underline-offset-4">
+                className="text-sm break-all underline underline-offset-4"
+              >
                 {addressToShortAddress(props.tokenOwner)}
               </a>
               {props.tokenMetadata.passportUri && (
@@ -243,7 +245,8 @@ export function TokenCardHeader(props: TokenCardHeaderProps): JSX.Element {
                 <a
                   href={`${props.contracts.chain.blockExplorers?.default?.url}/address/${props.tokenInvestor}`}
                   target="_blank"
-                  className="underline underline-offset-4">
+                  className="underline underline-offset-4"
+                >
                   {addressToShortAddress(props.tokenInvestor)}
                 </a>
               )}
