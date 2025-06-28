@@ -26,7 +26,7 @@ export function SiteHeader() {
             </Link>
           </div>
 
-          <div className="flex items-center justify-center space-x-6">
+          <div className="flex items-center justify-center space-x-6 ml-32">
             <Link
               href="/explore"
               className="hidden md:block text-sm font-medium hover:text-muted-foreground"

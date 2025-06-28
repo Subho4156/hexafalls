@@ -15,14 +15,18 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    baseSepolia: {
-      url: "https://sepolia.base.org", // ✅ Base Sepolia official RPC
-      accounts: [process.env.PRIVATE_KEY as string],
-      chainId: 84532,
-    },
+    // 🔁 Localhost (Hardhat Node)
     localhost: {
       url: "http://127.0.0.1:8545",
+      chainId: 31337,
     },
+
+    // 🌍 Ethereum Mainnet
+    // mainnet: {
+    //   url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+    //   accounts: [process.env.PRIVATE_KEY as string],
+    //   chainId: 1,
+    // },
   },
 };
 
