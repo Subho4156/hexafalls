@@ -28,7 +28,7 @@ export function SiteHeader() {
           {authenticated && (
             <div className="flex items-center justify-center space-x-6">
               <Link
-                href="/explore"
+                href="/feed"
                 className="hidden md:block text-sm font-medium hover:text-muted-foreground"
               >
                 Explore
