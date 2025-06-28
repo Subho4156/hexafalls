@@ -18,15 +18,7 @@ export const siteConfig = {
   description:
     "A platform for tokenization of crops and livestock to attract investments",
   contracts: {
-    baseTestnet: {
-      chain: baseSepolia,
-      farmToken: "0x5FbDB2315678afecb367f032d93F642f64180aa3" as `0x${string}`,
-      usdToken: "0x02008a8DBc938bd7930bf370617065B6B0c1221a" as `0x${string}`,
-      entryPoint: "0x0000000000000000000000000000000000000000" as `0x${string}`,
-      paymaster: "0x0000000000000000000000000000000000000000" as `0x${string}`,
-      accountFactory: "0x0000000000000000000000000000000000000000" as `0x${string}`,
-      accountAbstractionSuported: false,
-    } as SiteConfigContracts,
+    
 
     localhost: {
       chain: {
