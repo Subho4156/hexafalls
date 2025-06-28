@@ -2,14 +2,13 @@
 
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
-import { useAccount, useConfig } from "wagmi";
+import { usePrivy } from "@privy-io/react-auth";
 import { SiteHeaderConnectButton } from "./site-header-connect-button";
 import { ThemeToggle } from "./theme-toggle";
 import Image from "next/image";
 
 export function SiteHeader() {
-  const { address } = useAccount();
-
+  const { authenticated } = usePrivy();
   return (
     <header className="sticky top-0 z-50 bg-background border-border shadow-sm px-4 py-2">
       <div className="container h-16 mx-auto">
@@ -35,7 +34,7 @@ export function SiteHeader() {
             >
               Explore
             </Link>
-            {address && (
+            {authenticated && (
               <>
                 <Link
                   href="/farm"
