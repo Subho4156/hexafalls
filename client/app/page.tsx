@@ -22,16 +22,17 @@ export default function LandingPage() {
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center py-16">
         <section className="space-y-6">
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-primary">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight text-primary">
             Empowering Indian{" "}
             <span className="bg-gradient-to-r from-green-300 via-green-500 to-green-700 text-transparent bg-clip-text">
-              Agriculture
+              Agriculture{" "}
             </span>
-            with Blockchain
+            — with Blockchain
           </h1>
-          <h2 className="text-lg md:text-2xl text-muted-foreground">
-            Unlocking investment potential in Indian crops and livestock
-          </h2>
+          <p className="text-lg text-muted-foreground">
+            Investing in the roots of India — crops, livestock, and the future
+            of sustainable agriculture.
+          </p>
           <div className="flex flex-wrap gap-4">
             <Button
               variant="default"
@@ -201,16 +202,11 @@ export default function LandingPage() {
           <Button
             variant="default"
             size="lg"
-            onClick={() => handleRedirect("/farm")}
+            onClick={login}
+            className="group cursor-pointer"
           >
-            Tokenize Your Farm
-          </Button>
-          <Button
-            variant="secondary"
-            size="lg"
-            onClick={() => handleRedirect("/explore")}
-          >
-            Invest in India's Future
+            Get Started
+            <ChevronRight className="ml-2 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>
       </div>
