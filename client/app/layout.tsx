@@ -1,11 +1,11 @@
 import { SiteHeader } from "@/components/site-header";
-import { ThemeProvider } from "@/components/theme-provider";
 import { Web3Provider } from "@/components/web3-provider";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
+import { SiteFooter } from "@/components/site-footer";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -20,13 +20,6 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,23 +30,17 @@ export default function RootLayout({
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased dark",
           fontSans.variable
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
           <Web3Provider>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
               <div className="flex-1">{children}</div>
+              <SiteFooter />
             </div>
           </Web3Provider>
-        </ThemeProvider>
       </body>
     </html>
   );
