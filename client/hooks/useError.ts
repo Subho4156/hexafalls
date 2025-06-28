@@ -1,4 +1,8 @@
 import { useToast } from "@/components/ui/use-toast";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 966839881f0571ee3d5d52d4e7384c8a60b1523c
 import { useAccount } from "wagmi";
 import useSiteConfigContracts from "./useSiteConfigContracts";
 import { errorToPrettyError } from "@/lib/error";
