@@ -32,6 +32,7 @@ import { farmTokenAbi } from "@/contracts/abi/farmToken";
 
 export function TokenReturnInvestmentDialog(props: {
   token: string;
+  tokenInvestmentTokenSymbol: string;
   contracts: SiteConfigContracts;
   onReturn?: () => void;
 }) {
