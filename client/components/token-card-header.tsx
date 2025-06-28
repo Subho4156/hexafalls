@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { FarmTokenMetadata } from "@/types/farm-token-metadata";
 import { Button } from "./ui/button";
+import { JSX } from "react";
 import {
   Dialog,
   DialogContent,

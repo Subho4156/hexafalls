@@ -1,94 +1,35 @@
-// "use client";
-
-// import { SiteConfigContracts } from "@/config/site";
-// import { useEffect, useState } from "react";
-// import { isAddressEqual, zeroAddress } from "viem";
-// import { useInfiniteReadContracts } from "wagmi";
-// import EntityList from "./entity-list";
-// import { TokenCard } from "./token-card";
-// import { farmTokenAbi } from "@/contracts/abi/farmToken";
-
-// const LIMIT = 42;
-
-// export function TokenExploreList(props: { contracts: SiteConfigContracts }) {
-//   const [tokens, setTokens] = useState<string[] | undefined>();
-
-//   const { data } = useInfiniteReadContracts({
-//     cacheKey: `explore_list_${props.contracts.chain.id.toString()}`,
-//     contracts(pageParam) {
-//       return [...new Array(LIMIT)].map(
-//         (_, i) =>
-//           ({
-//             address: props.contracts.farmToken,
-//             abi: farmTokenAbi,
-//             functionName: "getParams",
-//             args: [BigInt(pageParam + i)],
-//             chainId: props.contracts.chain.id,
-//           } as const)
-//       );
-//     },
-//     query: {
-//       initialPageParam: 0,
-//       getNextPageParam: (_lastPage, _allPages, lastPageParam) => {
-//         return lastPageParam + 1;
-//       },
-//     },
-//   });
-
-//   useEffect(() => {
-//     setTokens(undefined);
-//     if (data) {
-//       const tokens: string[] = [];
-//       const dataFirstPage = (data as any).pages[0];
-//       for (let i = 0; i < dataFirstPage.length; i++) {
-//         const dataPageElement = dataFirstPage[i];
-//         if (
-//           dataPageElement.result.investmentAmount.toString() !== "0" &&
-//           isAddressEqual(
-//             dataPageElement.result.investor || zeroAddress,
-//             zeroAddress
-//           )
-//         ) {
-//           tokens.push(String(i));
-//         }
-//       }
-//       setTokens(tokens);
-//     }
-//   }, [data]);
-
-//   return (
-//     <EntityList
-//       entities={tokens?.toReversed()}
-//       renderEntityCard={(token, index) => (
-//         <TokenCard key={index} token={token} contracts={props.contracts} />
-//       )}
-//       noEntitiesText={`No tokens on ${props.contracts.chain.name} 😐`}
-//       className="gap-6"
-//     />
-//   );
-// }
-
 "use client";
 
-import { useEffect, useMemo } from "react";
-import { isAddressEqual, zeroAddress } from "viem";
-import { useReadContracts } from "wagmi";
-import EntityList from "./entity-list";
+import { useMemo } from "react";
+import { isAddressEqual, zeroAddress, type Address } from "viem";
+import {
+  useReadContracts,
+  type ContractFunctionConfig,
+} from "wagmi"; // ✅ Import ContractFunctionConfig
+
+import type { SiteConfigContracts } from "@/config/site";
 import { farmTokenAbi } from "@/contracts/abi/farmToken";
-import { SiteConfigContracts } from "@/config/site";
+import EntityList from "./entity-list";
 import { TokenCard } from "./token-card";
 
 const LIMIT = 42;
+
+// Type of return value from your contract
+type TokenParams = {
+  investmentAmount: bigint;
+  investor: `0x${string}`;
+};
 
 export function TokenExploreList({
   contracts,
 }: {
   contracts: SiteConfigContracts;
 }) {
-  const contractCalls = useMemo(
+  // ✅ Explicitly type contractCalls
+  const contractCalls: ContractFunctionConfig[] = useMemo(
     () =>
       [...Array(LIMIT)].map((_, i) => ({
-        address: contracts.farmToken,
+        address: contracts.farmToken as Address,
         abi: farmTokenAbi,
         functionName: "getParams",
         args: [BigInt(i)],
@@ -104,7 +45,10 @@ export function TokenExploreList({
     if (!tokenParamsData) return [];
 
     return tokenParamsData
-      .map((data, index) => ({ index, params: data.result }))
+      .map((d, index) => {
+        const result = d.result as TokenParams;
+        return { index, params: result };
+      })
       .filter(
         ({ params }) =>
           params &&
@@ -114,8 +58,6 @@ export function TokenExploreList({
       .map(({ index }) => String(index))
       .reverse();
   }, [tokenParamsData]);
-
-  console.log(tokens);
 
   return (
     <EntityList
