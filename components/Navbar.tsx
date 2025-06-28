@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 // import { Logo } from "./logo";
 import { NavMenu } from "./nav-menu";
+import { ArrowBigRight } from "lucide-react";
 // import { NavigationSheet } from "./navigation-sheet";
 
 const Navbar01Page = () => {
@@ -12,7 +13,9 @@ const Navbar01Page = () => {
           <NavMenu className="hidden md:block" />
 
           <div className="flex items-center gap-3">
-            <Button>Get Started</Button>
+            <Button>
+              Get Started <ArrowBigRight />{" "}
+            </Button>
             {/* Mobile Menu */}
             <div className="md:hidden">{/* <NavigationSheet /> */}</div>
           </div>
