@@ -1,15 +1,20 @@
+// TokenCard.tsx
 "use client";
 
 import { useMemo } from "react";
-import { SiteConfigContracts } from "@/config/site";
+import type { Address } from "viem";
+import type { ReadContractsConfig  } from "wagmi";
+import { useReadContract, useReadContracts } from "wagmi";
+import { farmTokenAbi } from "@/contracts/abi/farmToken";
 import { TokenCardHeader } from "./token-card-header";
 import { TokenCardRecords } from "./token-card-records";
 import { Separator } from "./ui/separator";
-import useMetadataLoader from "@/hooks/useMetadataLoader";
-import { useReadContract, useReadContracts } from "wagmi";
 import { Skeleton } from "./ui/skeleton";
-import { farmTokenAbi } from "@/contracts/abi/farmToken";
-import { FarmTokenMetadata } from "@/types/farm-token-metadata";
+import useMetadataLoader from "@/hooks/useMetadataLoader";
+import type { SiteConfigContracts } from "@/config/site";
+import type { FarmTokenMetadata } from "@/types/farm-token-metadata";
+import type { JSX } from "react";
+
 
 const NATIVE_TOKEN_SYMBOL = "ETH";
 const DEFAULT_REPUTATION_SCORE = 50;
@@ -20,48 +25,53 @@ interface TokenCardProps {
 }
 
 export function TokenCard({ token, contracts }: TokenCardProps): JSX.Element {
-  const contractCalls = useMemo(
-    () => [
-      {
-        address: contracts.farmToken,
-        abi: farmTokenAbi,
-        functionName: "ownerOf",
-        args: [BigInt(token)],
-      },
-      {
-        address: contracts.farmToken,
-        abi: farmTokenAbi,
-        functionName: "getParams",
-        args: [BigInt(token)],
-      },
-      {
-        address: contracts.farmToken,
-        abi: farmTokenAbi,
-        functionName: "tokenURI",
-        args: [BigInt(token)],
-      },
-    ],
-    [token, contracts.farmToken]
-  );
+  const contractCalls: readContract[] = useMemo(() => [
+    {
+      address: contracts.farmToken as Address,
+      abi: farmTokenAbi,
+      functionName: "ownerOf",
+      args: [BigInt(token)],
+    },
+    {
+      address: contracts.farmToken as Address,
+      abi: farmTokenAbi,
+      functionName: "getParams",
+      args: [BigInt(token)],
+    },
+    {
+      address: contracts.farmToken as Address,
+      abi: farmTokenAbi,
+      functionName: "tokenURI",
+      args: [BigInt(token)],
+    },
+  ], [token, contracts.farmToken]);
 
-  const { data, isLoading, isError, refetch } = useReadContracts({
+  const {
+    data: readData,
+    isLoading,
+    isError,
+    refetch,
+  } = useReadContracts({
     contracts: contractCalls,
   });
 
-  const [tokenOwner, tokenParams, tokenMetadataUri] = data || [];
+  const [tokenOwner, tokenParams, tokenMetadataUri] = readData || [];
 
-  const { data: reputationScore } = useReadContract({
-    address: contracts.farmToken,
+  const reputationScoreQuery = useReadContract({
+    address: contracts.farmToken as Address,
     abi: farmTokenAbi,
     functionName: "calculateReputationScore",
-    args: [tokenOwner?.result as `0x${string}`],
-    enabled: Boolean(tokenOwner?.result),
+    args: tokenOwner?.result ? [tokenOwner.result as Address] : undefined,
   });
 
-  const { data: tokenMetadata, isLoading: isTokenMetadataLoading } =
-    useMetadataLoader<FarmTokenMetadata>(tokenMetadataUri?.result);
+  const { data: reputationScore } = reputationScoreQuery;
 
-  console.log(tokenMetadata);
+  const metadataResult = useMetadataLoader<FarmTokenMetadata>(
+    tokenMetadataUri?.result ?? ""
+  );
+
+  const tokenMetadata = metadataResult.data;
+  const isTokenMetadataLoading = !metadataResult.isLoaded;
 
   if (isLoading || isTokenMetadataLoading) {
     return <Skeleton className="w-full h-8" />;
@@ -78,6 +88,7 @@ export function TokenCard({ token, contracts }: TokenCardProps): JSX.Element {
 
   const { investmentAmount, investor, returnAmount, returnDate } =
     tokenParams.result;
+
   const finalReputationScore = Number(
     reputationScore ?? DEFAULT_REPUTATION_SCORE
   );

@@ -1,69 +1,77 @@
-import { useEffect, useState, useMemo } from "react";
-import { isAddressEqual, zeroAddress } from "viem";
-import { useAccount, useReadContracts } from "wagmi";
+import { useEffect, useMemo, useState } from "react";
+import { isAddressEqual } from "viem";
+import { useAccount, usePublicClient } from "wagmi";
 import EntityList from "./entity-list";
 import { TokenCard } from "./token-card";
 import { farmTokenAbi } from "@/contracts/abi/farmToken";
-import { SiteConfigContracts } from "@/config/site";
+import type { SiteConfigContracts } from "@/config/site";
+import type { Address } from "viem";
 
 const LIMIT = 42;
 
-export function TokenFarmList({
-  contracts,
-}: {
-  contracts: SiteConfigContracts;
-}) {
+export function TokenFarmList({ contracts }: { contracts: SiteConfigContracts }) {
   const { address } = useAccount();
-  const [smartAccountAddress, setSmartAccountAddress] = useState<
-    `0x${string}` | undefined
-  >();
+  const publicClient = usePublicClient();
+  const [ownedTokenIds, setOwnedTokenIds] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (address) {
-      setSmartAccountAddress(
-        contracts.accountAbstractionSuported ? undefined : address
-      );
-      // TODO: Implement account abstraction support if needed
-    } else {
-      setSmartAccountAddress(undefined);
-    }
+  // Determine smart account address
+  const smartAccountAddress = useMemo(() => {
+    return contracts.accountAbstractionSuported ? undefined : address;
   }, [address, contracts.accountAbstractionSuported]);
 
-  const contractCalls = useMemo(
-    () =>
-      [...Array(LIMIT)].map((_, i) => ({
-        address: contracts.farmToken,
-        abi: farmTokenAbi,
-        functionName: "ownerOf",
-        args: [BigInt(i)],
-      })),
-    [contracts.farmToken]
-  );
+  useEffect(() => {
+    const fetchOwnership = async () => {
+      if (!publicClient || !contracts.farmToken || !smartAccountAddress) return;
 
-  const { data: ownershipData } = useReadContracts({
-    contracts: contractCalls,
-  });
+      setLoading(true);
+      try {
+        const calls = [...Array(LIMIT)].map((_, i) => ({
+          address: contracts.farmToken as Address,
+          abi: farmTokenAbi,
+          functionName: "ownerOf" as const,
+          args: [BigInt(i)]  as const,
+        }));
 
-  const tokens = useMemo(() => {
-    if (!smartAccountAddress || !ownershipData) return [];
+       const result = await publicClient.multicall({
+          contracts: calls,
+        });
 
-    return ownershipData
-      .map((data, index) => ({ index, owner: data.result }))
-      .filter(
-        ({ owner }) =>
-          owner && isAddressEqual(owner as `0x${string}`, smartAccountAddress)
-      )
-      .map(({ index }) => String(index));
-  }, [ownershipData, smartAccountAddress]);
+        const owned = result
+          .map((res, i) =>
+            res.status === "success" &&
+            isAddressEqual(res.result as Address, smartAccountAddress)
+              ? String(i)
+              : null
+          )
+          .filter((id): id is string => id !== null);
+
+        setOwnedTokenIds(owned.reverse());
+      } catch (err) {
+        console.error("Multicall failed:", err);
+        setOwnedTokenIds([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOwnership();
+  }, [publicClient, contracts.farmToken, smartAccountAddress]);
 
   return (
-    <EntityList
-      entities={tokens?.toReversed()}
-      renderEntityCard={(token, index) => (
-        <TokenCard key={index} token={token} contracts={contracts} />
+    <div>
+      {loading ? (
+        <div className="text-center text-muted-foreground py-4">Loading tokens...</div>
+      ) : (
+        <EntityList
+          entities={ownedTokenIds}
+          renderEntityCard={(token, index) => (
+            <TokenCard key={index} token={token} contracts={contracts} />
+          )}
+          noEntitiesText={`No tokens on ${contracts.chain.name}`}
+          className="gap-6"
+        />
       )}
-      noEntitiesText={`No tokens on ${contracts.chain.name} 😐`}
-      className="gap-6"
-    />
+    </div>
   );
 }
