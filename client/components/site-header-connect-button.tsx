@@ -10,7 +10,7 @@ export function SiteHeaderConnectButton() {
   const { address } = useAccount();
 
   if (ready && !authenticated) {
-    return <Button onClick={login}>Get Started</Button>;
+    return <Button onClick={login} className="cursor-pointer">Get Started</Button>;
   }
 
   if (ready && authenticated) {
