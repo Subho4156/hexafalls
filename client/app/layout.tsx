@@ -49,6 +49,7 @@ export default function RootLayout({
         >
           <Web3Provider>
             <div className="relative flex min-h-screen flex-col">
+              <SiteHeader />
               <div className="flex-1">{children}</div>
             </div>
           </Web3Provider>
