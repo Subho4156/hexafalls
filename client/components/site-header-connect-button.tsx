@@ -4,15 +4,19 @@ import { addressToShortAddress } from "@/lib/converters";
 import { usePrivy } from "@privy-io/react-auth";
 import { useAccount } from "wagmi";
 import { Button } from "./ui/button";
+import { InteractiveHoverButton } from "./magicui/interactive-hover-button";
 
 export function SiteHeaderConnectButton() {
   const { ready, authenticated, login, logout } = usePrivy();
   const { address } = useAccount();
 
   if (ready && !authenticated) {
-    return <Button onClick={login}>Login</Button>;
+    return (
+      <InteractiveHoverButton onClick={login}>
+        Get Started
+      </InteractiveHoverButton>
+    );
   }
-
   if (ready && authenticated) {
     return (
       <Button variant="outline" onClick={logout}>
@@ -26,5 +30,5 @@ export function SiteHeaderConnectButton() {
     );
   }
 
-  return <></>;
+  return;
 }

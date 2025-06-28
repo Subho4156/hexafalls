@@ -3,7 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Web3Provider } from "@/components/web3-provider";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import "@/styles/globals.css";
+import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
 
@@ -49,7 +49,6 @@ export default function RootLayout({
         >
           <Web3Provider>
             <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
               <div className="flex-1">{children}</div>
             </div>
           </Web3Provider>
