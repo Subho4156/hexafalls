@@ -10,23 +10,15 @@ export function SiteHeaderConnectButton() {
   const { address } = useAccount();
 
   if (ready && !authenticated) {
-    return (
-      <Button onClick={login} className="cursor-pointer">
-        Get Started
-      </Button>
-    );
+    return <Button onClick={login}>Login</Button>;
   }
 
   if (ready && authenticated) {
     return (
-      <Button
-        variant="outline"
-        onClick={logout}
-        className="hover:text-muted-foreground cursor-pointer"
-      >
+      <Button variant="outline" onClick={logout}>
         Logout{" "}
         {address && (
-          <span className="text-xs pl-1">
+          <span className="text-xs text-muted-foreground pl-1">
             ({addressToShortAddress(address)})
           </span>
         )}

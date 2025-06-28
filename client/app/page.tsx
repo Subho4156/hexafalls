@@ -1,21 +1,22 @@
+import { RainbowButton } from "@/components/magicui/rainbow-button";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function LandingPage() {
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto px-4 md:px-8 py-12">
       {/* Hero Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-4">
+      <div className="min-h-screen flex items-center justify-center px-4">
         <section className="flex flex-col justify-center">
-          <h1 className="text-6xl font-extrabold tracking-tighter md:text-6xl">
-            Empowering African Agriculture with{" "}
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter text-center md:text-left">
+            Empowering Indian Agriculture with{" "}
             <span className="text-primary">Blockchain</span>
           </h1>
-          <h2 className="text-2xl font-normal tracking-tight text-muted-foreground mt-4">
-            Unlocking investment potential in African crops and livestock
+          <h2 className="text-2xl font-normal tracking-tight text-muted-foreground mt-4 text-center">
+            Unlocking investment potential in Indian farms and agritech
           </h2>
-          <div className="flex flex-row gap-4 mt-6">
+          <div className="flex flex-row gap-4 mt-6 justify-center">
             <Link href="/farm">
               <Button variant="default" size="lg">
                 Tokenize Your Farm
@@ -23,44 +24,35 @@ export default function LandingPage() {
             </Link>
             <Link href="/explore">
               <Button variant="secondary" size="lg">
-                Invest in Africa
+                Invest in India
               </Button>
             </Link>
           </div>
         </section>
-        <section className="flex items-center justify-center">
-          <Image
-            src="https://res.cloudinary.com/dgbreoalg/image/upload/v1729336883/florida_dxdoek.jpg"
-            alt="African Agriculture"
-            width={680}
-            height={680}
-            className="w-full rounded-lg object-cover"
-          />
-        </section>
       </div>
 
       {/* S.P.I.N. Sections */}
-      <div className="mt-16">
-        <h2 className="text-4xl font-bold mb-8 text-center">
-          Transforming African Agriculture
+      <div className="mt-20">
+        <h2 className="text-4xl font-bold mb-12 text-center">
+          Transforming Indian Agriculture
         </h2>
 
         {/* Situation */}
-        <div className="mb-8">
-          <p className="text-xs italic px-8 text-center">
-            {
-              "'Africa's agricultural sector is the backbone of the continent's economy, employing over 60% of the population. With vast arable land and a growing population, the potential for agricultural growth is immense.'"
-            }
+        <div className="mb-12">
+          <p className="text-xs italic px-4 md:px-12 text-center">
+            'India&apos;s agricultural sector supports over 50% of the workforce
+            and plays a critical role in food security. With abundant land and
+            diverse crops, the potential for growth and innovation is vast.'
           </p>
         </div>
 
         {/* Challenges */}
-        <div className="mb-8">
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-4 border rounded-lg p-2">
+        <div className="mb-12">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border rounded-lg p-6">
             <div className="aspect-[3/2] relative overflow-hidden rounded-lg">
               <Image
                 src="https://res.cloudinary.com/dgbreoalg/image/upload/v1729426259/jj-transformed_slds2s.webp"
-                alt="African Agriculture Challenges"
+                alt="Indian Agriculture Challenges"
                 layout="fill"
                 objectFit="cover"
               />
@@ -68,25 +60,24 @@ export default function LandingPage() {
             <div className="flex flex-col justify-center space-y-8 h-full py-4">
               <div className="flex flex-col justify-center items-center">
                 <h3 className="text-xl font-semibold text-center text-primary">
-                  Challenges Facing African Farmers
+                  Challenges Facing Indian Farmers
                 </h3>
                 <span className="text-sm text-center italic">
-                  Vulnerability & challenges:
+                  Key issues impacting growth:
                 </span>
               </div>
-
               <ul className="list-disc list-inside text-base space-y-8">
                 <li className="pl-4">
-                  Limited access to capital for farm improvements and expansion
+                  Inadequate access to institutional credit and insurance
                 </li>
                 <li className="pl-4">
-                  Difficulty in connecting with global markets and investors
+                  Supply chain inefficiencies and market disconnects
                 </li>
                 <li className="pl-4">
-                  Lack of modern technology and infrastructure
+                  Outdated technology and limited access to agritech
                 </li>
                 <li className="pl-4">
-                  Vulnerability to climate change and market fluctuations
+                  Vulnerability to erratic monsoons and pricing instability
                 </li>
               </ul>
             </div>
@@ -94,39 +85,36 @@ export default function LandingPage() {
         </div>
 
         {/* Implication */}
-        <div className="mb-8">
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-4 border rounded-lg p-2">
+        <div className="mb-12">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border rounded-lg p-6">
             <div className="flex flex-col justify-center space-y-8 h-full py-4">
               <div className="flex flex-col justify-center items-center">
                 <h3 className="text-xl font-semibold text-center text-primary">
                   The Cost of Inaction
                 </h3>
                 <span className="text-sm text-center italic">
-                  Without addressing these challenges:
+                  If these issues remain unresolved:
                 </span>
               </div>
-
               <ul className="list-disc list-inside text-base space-y-8">
                 <li className="pl-4">
-                  African farmers may struggle to meet growing food demands
+                  Indian farmers may struggle to adopt sustainable practices
                 </li>
                 <li className="pl-4">
-                  Rural poverty could increase, leading to urban migration
+                  Increasing migration from villages to cities in search of work
                 </li>
                 <li className="pl-4">
-                  The continent might miss out on the global agricultural trade
-                  potential
+                  India could lose competitiveness in agri-exports
                 </li>
                 <li className="pl-4">
-                  Food security and economic growth in Africa could be
-                  compromised
+                  Food inflation and rural distress could deepen
                 </li>
               </ul>
             </div>
             <div className="aspect-[3/2] relative overflow-hidden rounded-lg">
               <Image
                 src="https://res.cloudinary.com/dgbreoalg/image/upload/v1729425137/kk-transformed_fh3fwa.webp"
-                alt="Cost of Inaction in African Agriculture"
+                alt="Cost of Inaction in Indian Agriculture"
                 layout="fill"
                 objectFit="cover"
               />
@@ -135,12 +123,12 @@ export default function LandingPage() {
         </div>
 
         {/* Need-payoff */}
-        <div className="mb-8">
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-4 border rounded-lg p-2">
+        <div className="mb-12">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border rounded-lg p-6">
             <div className="aspect-[3/2] relative overflow-hidden rounded-lg">
               <Image
                 src="https://res.cloudinary.com/dgbreoalg/image/upload/v1729425629/corre_xzpwee.webp"
-                alt="Blockchain Solution for African Agriculture"
+                alt="Blockchain Solution for Indian Agriculture"
                 layout="fill"
                 objectFit="cover"
               />
@@ -151,23 +139,21 @@ export default function LandingPage() {
                   Our Blockchain Solution
                 </h3>
                 <span className="text-sm text-center italic">
-                  By tokenizing African agricultural assets, we can:
+                  Tokenizing India&apos;s agricultural potential:
                 </span>
               </div>
               <ul className="list-disc list-inside text-base space-y-8">
                 <li className="pl-4">
-                  Attract global investments to modernize African farms
+                  Bring global investments to Indian farmlands and agri-projects
                 </li>
                 <li className="pl-4">
-                  Provide farmers with access to capital for growth and
-                  innovation
+                  Enable micro-financing for farmers via tokenized assets
                 </li>
                 <li className="pl-4">
-                  Create a transparent and efficient marketplace for
-                  agricultural products
+                  Ensure transparency and traceability in agri-supply chains
                 </li>
                 <li className="pl-4">
-                  Empower smallholder farmers to compete in the global market
+                  Promote sustainable practices through data-driven insights
                 </li>
               </ul>
             </div>
@@ -176,50 +162,50 @@ export default function LandingPage() {
       </div>
 
       {/* How It Works */}
-      <div className="mt-16">
-        <div className="flex justify-center items-center">
-          <h2 className="text-4xl font-bold mb-8">How It Works</h2>
+      <div className="mt-20">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold">How It Works</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
-          <div className="text-center border p-4 rounded-md ">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="text-center border p-6 rounded-md">
             <h3 className="text-2xl font-semibold mb-4">1. Tokenize</h3>
             <p className="text-base">
-              African farmers tokenize their crops and livestock on our secure
-              blockchain platform.
+              Indian farmers tokenize their assets on our secure blockchain
+              platform.
             </p>
           </div>
-          <div className="text-center border  p-4 rounded-md">
+          <div className="text-center border p-6 rounded-md">
             <h3 className="text-2xl font-semibold mb-4">2. Invest</h3>
             <p className="text-base">
-              Global investors purchase tokens representing shares in African
-              agricultural projects.
+              Indian and global investors purchase tokens to support
+              agricultural growth.
             </p>
           </div>
-          <div className="text-center border  p-4 rounded-md">
+          <div className="text-center border p-6 rounded-md">
             <h3 className="text-2xl font-semibold mb-4">3. Grow</h3>
             <p className="text-base">
-              Farmers access capital to improve yields, while investors benefit
-              from Africa`&apos;`s agricultural potential.
+              Farmers access funding to boost productivity, while investors gain
+              from agri-prosperity.
             </p>
           </div>
         </div>
       </div>
 
       {/* Call to Action */}
-      <div className="mt-16 text-center">
+      <div className="mt-20 text-center">
         <h2 className="text-4xl font-bold mb-8">
-          Join the African Agricultural Revolution
+          Join the Indian Agricultural Revolution
         </h2>
         <div className="flex justify-center gap-4">
           <Link href="/farm">
-            <Button variant="default" size="lg">
+            <RainbowButton variant="default" size="lg">
               Tokenize Your Farm
-            </Button>
+            </RainbowButton>
           </Link>
           <Link href="/explore">
-            <Button variant="secondary" size="lg">
-              Invest in Africa&apos;s Future
-            </Button>
+            <RainbowButton variant="outline" size="lg">
+              Invest in India&apos;s Future
+            </RainbowButton>
           </Link>
         </div>
       </div>
