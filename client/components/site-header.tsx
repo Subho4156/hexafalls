@@ -13,7 +13,6 @@ export function SiteHeader() {
     <header className="top-0 z-50 px-4 py-2">
       <div className="container h-16 mx-auto">
         <div className="flex h-full items-center justify-between">
-          {/* Logo */}
           <div className="flex-none">
             <Link href="/" className="flex items-center space-x-2">
               <span className="flex justify-center items-center font-bold">
@@ -26,8 +25,6 @@ export function SiteHeader() {
               </span>
             </Link>
           </div>
-
-          {/* Center Nav (Only show after login) */}
           {authenticated && (
             <div className="flex items-center justify-center space-x-6">
               <Link
@@ -48,18 +45,8 @@ export function SiteHeader() {
               >
                 My Investments
               </Link>
-              <Link
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noreferrer"
-                className="hidden md:block text-sm font-medium hover:text-muted-foreground"
-              >
-                GitHub
-              </Link>
             </div>
           )}
-
-          {/* Connect Button (Always visible) */}
           <div className="flex items-center space-x-4">
             <SiteHeaderConnectButton />
           </div>

@@ -17,9 +17,6 @@ export const siteConfig = {
   name: "Krishak Biniyog",
   description:
     "A platform for tokenization of crops and livestock to attract investments",
-  links: {
-    github: "https://github.com/nwakaku/AgroBased",
-  },
   contracts: {
     baseTestnet: {
       chain: baseSepolia,

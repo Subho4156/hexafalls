@@ -22,7 +22,7 @@ export function SiteHeaderConnectButton() {
       <Button variant="outline" onClick={logout}>
         Logout{" "}
         {address && (
-          <span className="text-xs text-muted-foreground pl-1">
+          <span className="text-xs pl-1 cursor-pointer">
             ({addressToShortAddress(address)})
           </span>
         )}
