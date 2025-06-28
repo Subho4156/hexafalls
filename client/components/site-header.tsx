@@ -27,7 +27,6 @@ export function SiteHeader() {
             </Link>
           </div>
 
-<<<<<<< HEAD
           {/* Center Nav (Only show after login) */}
           {authenticated && (
             <div className="flex items-center justify-center space-x-6">
@@ -59,40 +58,6 @@ export function SiteHeader() {
               </Link>
             </div>
           )}
-=======
-          <div className="flex items-center justify-center space-x-6 ml-32">
-            <Link
-              href="/explore"
-              className="hidden md:block text-sm font-medium hover:text-muted-foreground"
-            >
-              Explore
-            </Link>
-            {authenticated && (
-              <>
-                <Link
-                  href="/farm"
-                  className="hidden md:block text-sm font-medium hover:text-muted-foreground"
-                >
-                  My Farm
-                </Link>
-                <Link
-                  href="/investments"
-                  className="hidden md:block text-sm font-medium hover:text-muted-foreground"
-                >
-                  My Investments
-                </Link>
-              </>
-            )}
-            <Link
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden md:block text-sm font-medium hover:text-muted-foreground"
-            >
-              GitHub
-            </Link>
-          </div>
->>>>>>> 494fe135c86cc12754bcd19f437c29a9ee50bc93
 
           {/* Connect Button (Always visible) */}
           <div className="flex items-center space-x-4">
