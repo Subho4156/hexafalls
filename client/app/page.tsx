@@ -18,14 +18,14 @@ export default function LandingPage() {
           </h2>
           <div className="flex flex-row gap-4 mt-6 justify-center">
             <Link href="/farm">
-              <Button variant="default" size="lg">
-                Tokenize Your Farm
-              </Button>
+            <RainbowButton variant="default" size="lg">
+              Tokenize Your Farm
+            </RainbowButton>
             </Link>
             <Link href="/explore">
-              <Button variant="secondary" size="lg">
-                Invest in India
-              </Button>
+            <RainbowButton variant="outline" size="lg">
+              Invest in India&apos;s Future
+            </RainbowButton>
             </Link>
           </div>
         </section>
