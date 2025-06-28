@@ -1,9 +1,14 @@
+"use client";
 import { RainbowButton } from "@/components/magicui/rainbow-button";
 import { Button } from "@/components/ui/button";
+import { usePrivy } from "@privy-io/react-auth";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function LandingPage() {
+  const { authenticated } = usePrivy();
+   
   return (
     <div className="container mx-auto px-4 md:px-8 py-12">
       {/* Hero Section */}
@@ -17,11 +22,16 @@ export default function LandingPage() {
             Unlocking investment potential in Indian farms and agritech
           </h2>
           <div className="flex flex-row gap-4 mt-6 justify-center">
-            <Link href="/farm">
-            <RainbowButton variant="default" size="lg">
-              Tokenize Your Farm
-            </RainbowButton>
-            </Link>
+            {authenticated ? (
+              <Link href="/farm">
+                <RainbowButton variant="default" size="lg">
+                  Tokenize Your Farm
+                </RainbowButton>
+              </Link>
+            ) : (
+              <Link href={"/"}>
+              </Link>
+            )}
             <Link href="/explore">
             <RainbowButton variant="outline" size="lg">
               Invest in India&apos;s Future
