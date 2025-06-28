@@ -4,8 +4,8 @@ import { useMemo } from "react";
 import { isAddressEqual, zeroAddress, type Address } from "viem";
 import {
   useReadContracts,
-  type ContractFunctionConfig,
-} from "wagmi"; // ✅ Import ContractFunctionConfig
+  type ReadContractConfig,
+} from "wagmi"; // ✅ correct import
 
 import type { SiteConfigContracts } from "@/config/site";
 import { farmTokenAbi } from "@/contracts/abi/farmToken";
@@ -14,7 +14,7 @@ import { TokenCard } from "./token-card";
 
 const LIMIT = 42;
 
-// Type of return value from your contract
+// ✅ Type for smart contract result
 type TokenParams = {
   investmentAmount: bigint;
   investor: `0x${string}`;
@@ -25,8 +25,7 @@ export function TokenExploreList({
 }: {
   contracts: SiteConfigContracts;
 }) {
-  // ✅ Explicitly type contractCalls
-  const contractCalls: ContractFunctionConfig[] = useMemo(
+  const contractCalls: ReadContractConfig[] = useMemo(
     () =>
       [...Array(LIMIT)].map((_, i) => ({
         address: contracts.farmToken as Address,
@@ -45,17 +44,17 @@ export function TokenExploreList({
     if (!tokenParamsData) return [];
 
     return tokenParamsData
-      .map((d, index) => {
+      .map((d: { result: unknown }, index: number) => {
         const result = d.result as TokenParams;
         return { index, params: result };
       })
       .filter(
-        ({ params }) =>
+        ({ params }: { params: TokenParams }) =>
           params &&
           params.investmentAmount.toString() !== "0" &&
           isAddressEqual(params.investor || zeroAddress, zeroAddress)
       )
-      .map(({ index }) => String(index))
+      .map(({ index }: { index: number }) => String(index))
       .reverse();
   }, [tokenParamsData]);
 
@@ -65,7 +64,7 @@ export function TokenExploreList({
       renderEntityCard={(token, index) => (
         <TokenCard key={index} token={token} contracts={contracts} />
       )}
-      noEntitiesText={`No tokens on ${contracts.chain.name} 😐`}
+      noEntitiesText={`No tokens on ${contracts.chain.name} 😐`} // ✅ FIXED
       className="gap-6"
     />
   );

@@ -90,6 +90,7 @@ export function TokenCreateForm() {
       }
       if (chainId !== contracts.chain.id) {
         throw new Error(`Connect to ${contracts.chain.name}`);
+
       }
 
       // Upload passport to IPFS first
@@ -153,10 +154,14 @@ export function TokenCreateForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="Cattle">🐂 Cattle</SelectItem>
                   <SelectItem value="Grains">🌾 Grains</SelectItem>
-                  <SelectItem value="Poultry">🐔 Poultry</SelectItem>
                   <SelectItem value="Coffee">☕ Coffee</SelectItem>
+                  <SelectItem value="Fruits">🍎 Fruits</SelectItem>
+                  <SelectItem value="Vegetables">🥦 Vegetables</SelectItem>
+                  <SelectItem value="Spices">🌶️ Spices</SelectItem>
+                  <SelectItem value="Tea">🍵 Tea</SelectItem>
+                  <SelectItem value="Oilseeds">🌻 Oilseeds</SelectItem>
+
                 </SelectContent>
               </Select>
               <FormMessage />
