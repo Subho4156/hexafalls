@@ -1,11 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { isAddressEqual } from "viem";
+import { isAddressEqual, type Address } from "viem";
 import { useAccount, usePublicClient } from "wagmi";
 import EntityList from "./entity-list";
 import { TokenCard } from "./token-card";
 import { farmTokenAbi } from "@/contracts/abi/farmToken";
 import type { SiteConfigContracts } from "@/config/site";
-import type { Address } from "viem";
 
 const LIMIT = 42;
 
@@ -25,22 +24,25 @@ export function TokenFarmList({ contracts }: { contracts: SiteConfigContracts })
       if (!publicClient || !contracts.farmToken || !smartAccountAddress) return;
 
       setLoading(true);
+
       try {
         const calls = [...Array(LIMIT)].map((_, i) => ({
           address: contracts.farmToken as Address,
           abi: farmTokenAbi,
           functionName: "ownerOf" as const,
-          args: [BigInt(i)]  as const,
+          args: [BigInt(i)] as const,
         }));
 
-       const result = await publicClient.multicall({
-          contracts: calls,
-        });
+        // Replacing multicall with Promise.all using readContract
+        const result = await Promise.all(
+          calls.map((call) =>
+            publicClient.readContract(call).catch(() => null)
+          )
+        );
 
         const owned = result
-          .map((res, i) =>
-            res.status === "success" &&
-            isAddressEqual(res.result as Address, smartAccountAddress)
+          .map((owner, i) =>
+            owner && isAddressEqual(owner as Address, smartAccountAddress)
               ? String(i)
               : null
           )
@@ -48,7 +50,7 @@ export function TokenFarmList({ contracts }: { contracts: SiteConfigContracts })
 
         setOwnedTokenIds(owned.reverse());
       } catch (err) {
-        console.error("Multicall failed:", err);
+        console.error("Read contract failed:", err);
         setOwnedTokenIds([]);
       } finally {
         setLoading(false);
@@ -61,7 +63,9 @@ export function TokenFarmList({ contracts }: { contracts: SiteConfigContracts })
   return (
     <div>
       {loading ? (
-        <div className="text-center text-muted-foreground py-4">Loading tokens...</div>
+        <div className="text-center text-muted-foreground py-4">
+          Loading tokens...
+        </div>
       ) : (
         <EntityList
           entities={ownedTokenIds}
