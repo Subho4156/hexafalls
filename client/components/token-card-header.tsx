@@ -80,16 +80,23 @@ export function TokenCardHeader(props: TokenCardHeaderProps): JSX.Element {
       <Avatar className="size-14">
         <AvatarImage src="" alt="Icon" />
         <AvatarFallback className="text-2xl bg-primary">
-          {props.tokenMetadata.category === "Cattle"
-            ? "🐂"
-            : props.tokenMetadata.category === "Grains"
+          {props.tokenMetadata.category === "Grains"
             ? "🌾"
-            : props.tokenMetadata.category === "Poultry"
-            ? "🐔"
             : props.tokenMetadata.category === "Coffee"
-            ? "☕"
-            : "⭐"}
+              ? "☕"
+              : props.tokenMetadata.category === "Fruits"
+                ? "🍎"
+                : props.tokenMetadata.category === "Vegetables"
+                  ? "🥦"
+                  : props.tokenMetadata.category === "Spices"
+                    ? "🌶️"
+                    : props.tokenMetadata.category === "Tea"
+                      ? "🍵"
+                      : props.tokenMetadata.category === "Oilseeds"
+                        ? "🌻"
+                        : "⭐"}
         </AvatarFallback>
+
       </Avatar>
 
       <div className="w-full flex flex-col gap-4">
@@ -118,22 +125,20 @@ export function TokenCardHeader(props: TokenCardHeaderProps): JSX.Element {
             <span className="text-sm text-muted-foreground">Reputation:</span>
             <Progress
               value={props.reputationScore}
-              className={`w-32 h-2 ${
-                props.reputationScore >= 70
-                  ? "bg-green-200 [&>div]:bg-green-500"
-                  : props.reputationScore >= 50
+              className={`w-32 h-2 ${props.reputationScore >= 70
+                ? "bg-green-200 [&>div]:bg-green-500"
+                : props.reputationScore >= 50
                   ? "bg-yellow-200 [&>div]:bg-yellow-500"
                   : "bg-red-200 [&>div]:bg-red-500"
-              }`}
+                }`}
             />
             <span
-              className={`text-sm font-medium ${
-                props.reputationScore >= 70
-                  ? "text-green-500"
-                  : props.reputationScore >= 50
+              className={`text-sm font-medium ${props.reputationScore >= 70
+                ? "text-green-500"
+                : props.reputationScore >= 50
                   ? "text-yellow-500"
                   : "text-red-500"
-              }`}
+                }`}
             >
               {props.reputationScore}%
             </span>
