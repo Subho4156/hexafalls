@@ -1,8 +1,5 @@
 import { SiteHeader } from "@/components/site-header";
-import { TailwindIndicator } from "@/components/tailwind-indicator";
-
 import { ThemeProvider } from "@/components/theme-provider";
-
 import { Web3Provider } from "@/components/web3-provider";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -55,7 +52,6 @@ export default function RootLayout({
               <SiteHeader />
               <div className="flex-1">{children}</div>
             </div>
-            <TailwindIndicator />
           </Web3Provider>
         </ThemeProvider>
       </body>

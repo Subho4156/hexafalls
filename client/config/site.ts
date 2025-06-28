@@ -13,8 +13,7 @@ export type SiteConfigContracts = {
 };
 
 export const siteConfig = {
-  emoji: "🦁",
-  name: "AGROBASED",
+  logo: "/logo.png",
   description:
     "A platform for tokenization of crops and livestock to attract investments",
   links: {
