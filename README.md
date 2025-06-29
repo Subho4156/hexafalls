@@ -47,7 +47,7 @@ Ensure you have the following installed:
 ### 📥 Installation
 
 ```bash
-git clone https://github.com/your-username/krishakbiniyog.git
+git clone https://github.com/your-username/krishak-biniyog.git
 cd app
 npm install
 ````
