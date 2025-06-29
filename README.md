@@ -1,7 +1,7 @@
 # Krishak Biniyog
 Empowering Indian agriculture through blockchain-based asset tokenization and global investment  
 
-KrishakBiniyog is a revolutionary platform that leverages blockchain technology to address critical challenges in Indian agriculture. By tokenizing agricultural assets, we aim to bridge the gap between Indian farmers and global investors, unlocking the vast potential of the country's agricultural sector.
+Krishak Biniyog is a revolutionary platform that leverages blockchain technology to address critical challenges in Indian agriculture. By tokenizing agricultural assets, we aim to bridge the gap between Indian farmers and global investors, unlocking the vast potential of the country's agricultural sector.
 
 ---
 
