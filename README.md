@@ -94,4 +94,4 @@ This project is licensed under the [MIT License](LICENSE.md).
 
 ## 📬 Contact
 
-For more info, email us at: **[info@krishakbiniyog.in](mailto:teamxtesseract@gmail.com)**
+For more info, email us at: **[teamxtesseract@gmail.com](mailto:teamxtesseract@gmail.com)**
