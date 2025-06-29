@@ -31,7 +31,7 @@ export function SiteHeader() {
                 href="/feed"
                 className="hidden md:block text-sm font-medium hover:text-muted-foreground"
               >
-                Explore
+                Feed
               </Link>
               <Link
                 href="/farm"

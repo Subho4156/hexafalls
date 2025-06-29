@@ -94,7 +94,7 @@ export function TokenCard({ token, contracts }: TokenCardProps): JSX.Element {
   );
 
   return (
-    <div className="w-full flex flex-col items-center border rounded-2xl px-6 py-8">
+    <div className="w-full flex flex-col items-center px-6 py-8">
       <TokenCardHeader
         token={token}
         tokenMetadata={tokenMetadata}

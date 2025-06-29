@@ -46,8 +46,9 @@ export default function LandingPage() {
             <Button
               variant="outline"
               size="lg"
-              onClick={() => handleRedirect("/explore")}
+              onClick={() => handleRedirect("/feed")}
               className="group"
+            
             >
               Invest in India
               <ChevronRight className="ml-2 transition-transform group-hover:translate-x-1" />
