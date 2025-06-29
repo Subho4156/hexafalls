@@ -19,21 +19,6 @@ KrishakBiniyog is a revolutionary platform that leverages blockchain technology 
 
 ---
 
-## 🚀 Features
-
-- ✅ **Tokenization** of agricultural assets (crops, livestock, land)  
-- 🌐 **Blockchain-based marketplace** connecting Indian farmers with global investors  
-- 🤝 **Smart contracts** for fair and timely payments  
-- 🔁 **Risk-sharing** through diversified investment pools  
-- 📊 **Data analytics** for optimized resource allocation  
-- 📱 **Mobile-first UI** for rural, low-bandwidth areas  
-- 💸 **Integration with UPI and local mobile wallets** (coming soon)  
-- 📈 **Prediction markets** for crop yield forecasts (coming soon)  
-- 🏛️ **DAO governance** structure for decentralized, community-led decision making (coming soon)  
-- 🎨 **NFT marketplace** for unique agricultural products and experiences  
-
----
-
 ## 🧪 Technologies Used
 
 - **Solidity**  
